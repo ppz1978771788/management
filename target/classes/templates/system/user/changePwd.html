@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>修改密码--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="/resources/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/resources/css/public.css" media="all" />
+	<script type="text/javascript" src="/resources/layui/layui.js"></script>
+</head>
+<body class="childrenBody">
+<form class="layui-form layui-row changePwd">
+	<div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+		<div class="layui-form-item">
+			<label class="layui-form-label">旧密码</label>
+			<div class="layui-input-block">
+				<input type="password"  name="oldpwd" id="oldpwd" value="" placeholder="请输入旧密码" lay-verify="required" class="layui-input pwd">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">新密码</label>
+			<div class="layui-input-block">
+				<input type="password" name="pwd1" value="" id="pwd1" placeholder="请输入新密码" lay-verify="required" class="layui-input pwd">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">确认密码</label>
+			<div class="layui-input-block">
+				<input type="password" name="pwd2" value="" id="pwd2" placeholder="请确认密码" lay-verify="required" class="layui-input pwd">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" id="changePwd" lay-filter="changePwd">立即修改</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</div>
+	<script>
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form
+				, layer = layui.layer
+				, layedit = layui.layedit
+				, laydate = layui.laydate
+				,$=layui.jquery;
+
+		form.on("submit(changePwd)",function(data){
+		$.post("/change/pwd",data.field,function (res) {
+			if (res.code==200){
+				layer.msg(res.msg);
+			}else if (res.code==-2)
+			{
+				layer.msg(res.msg);
+			}else if (res.code==-3){}
+
+					layer.msg(res.msg);
+		}
+		)
+			return false;
+		});
+	});
+	</script>
+</form>
+</body>
+</html>
